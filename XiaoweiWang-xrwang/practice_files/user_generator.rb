@@ -4,10 +4,11 @@ require 'JSON'
 require 'rest-client'
 
 class RenterGenerator
-  attr_accessor :url, :users, :stories
+  attr_accessor :url, :users, :stories, :author
 
   def initialize (url)
   @url = url
+  @author = []
   connect_to_api(url)
   end
 
@@ -28,9 +29,11 @@ class RenterGenerator
 
   def renter_names(stories)
     stories.each do |story|
-      author = story["data"]["author"]
-      puts "#{author}"
+      author.push (story["data"]["author"])
     end
+    puts "#{author}"
+    binding.pry
+
   end
 
 end

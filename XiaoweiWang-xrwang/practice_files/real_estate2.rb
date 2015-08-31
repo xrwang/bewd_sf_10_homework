@@ -19,7 +19,7 @@ class RenterGenerator
   def initialize (url)
     @url = url
     @users = users
-    @author = author
+    @author = []
     connect_to_api(url)
   end
 
@@ -40,11 +40,9 @@ class RenterGenerator
 
   def renter_names(stories)
     stories.each do |story|
-      @author = story["data"]["author"]
-      # puts "#{author}"
+      author.push (story["data"]["author"])
     end
   end
-
 end
 
 
@@ -53,8 +51,8 @@ class BuildingCreator
   attr_accessor :building, :user_list
 
   def initialize
-    create_building
     create_resident_list
+    create_building
   end
 
   def create_resident_list
@@ -76,7 +74,7 @@ class BuildingCreator
   end
 
   def add_unit_to_building#(building)
-    binding.pry
+    # binding.pry
     units = user_list.users.to_i
     puts "This is a building called Reddit Central. From Reddit's json file, there are #{units} in this apartment"
     units.times do
@@ -130,11 +128,11 @@ class BuildingCreator
     salary = 50000000
     puts "at Reddit Central Building, our renters have #{credit_score} and #{salary}"
     puts "what is the renter's name"
-    author.each do |author|
-      renter_name = @author
-    renter = Renter.new(credit_score , salary, renter_name)
-  end
-
+    renter_name = user_list.author
+    # binding.pry
+    renter_name.each do |renter|
+      Renter.new(credit_score , salary, renter_name)
+    end
   end
 
   def print_all
