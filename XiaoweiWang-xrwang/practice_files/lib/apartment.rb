@@ -1,10 +1,10 @@
 require 'pry'
 
 class Apartment
-  attr_accessor :unit, :sqft, :bedrooms, :bathrooms, :renter, :rent
+  attr_accessor :apartmentnumber, :sqft, :bedrooms, :bathrooms, :renter, :rent
 
-  def initialize (unitnumber, sqft, bedrooms, bathrooms)
-    @unitnumber = unitnumber
+  def initialize (apartmentnumber, sqft, bedrooms, bathrooms)
+    @apartmentnumber = apartmentnumber
     @sqft = sqft
     @bedrooms = bedrooms
     @bathrooms = bathrooms
@@ -16,7 +16,7 @@ class Apartment
 
 
   def to_s
-    "Apartment #{unitnumber} has #{sqft} squarefeet"
+    "Apartment #{apartmentnumber} has #{sqft} squarefeet"
     #every class comes with a predefined set of things to do, inherits method
     #when you print out apartment1 (instance) it is Apartment xjdjdkfjfj OBject id number
     #basicaly you want it to print

@@ -1,14 +1,65 @@
+
+# the goal of real_estate2.rb is to take the number of authors from reddit.com/.json and use
+# that number as the number of units in the building.
+# there is only one renter per apartment
+# the renter names come from reddit's author names
+
 require_relative 'lib/building'
 require_relative 'lib/apartment'
 require_relative 'lib/renter'
 
+
 require 'pry'
+require 'JSON'
+require 'rest-client'
+
+class RenterGenerator
+  attr_accessor :url, :users, :author
+
+  def initialize (url)
+    @url = url
+    @users = users
+    @author = author
+    connect_to_api(url)
+  end
+
+  def connect_to_api(url)
+    response = RestClient.get(url)
+    response_p = JSON.parse(response)
+    finding_stories(response_p)
+  end
+
+  def finding_stories(response_p)
+    stories = response_p["data"]["children"]
+    number_of_apartments = stories.length
+    @users = number_of_apartments
+    renter_names(stories)
+
+    # puts "we have #{users} apartments and renters"
+  end
+
+  def renter_names(stories)
+    stories.each do |story|
+      @author = story["data"]["author"]
+      # puts "#{author}"
+    end
+  end
+
+end
+
+
 
 class BuildingCreator
-  attr_accessor :building
+  attr_accessor :building, :user_list
 
   def initialize
     create_building
+    create_resident_list
+  end
+
+  def create_resident_list
+    user_list = RenterGenerator.new("http://www.reddit.com/.json")
+    @user_list = user_list
   end
 
   def create_building
@@ -25,8 +76,9 @@ class BuildingCreator
   end
 
   def add_unit_to_building#(building)
-    puts "how many number of apartments"
-    units = gets.strip.to_i
+    binding.pry
+    units = user_list.users.to_i
+    puts "This is a building called Reddit Central. From Reddit's json file, there are #{units} in this apartment"
     units.times do
       @building.units.push(create_apartment)
     end
@@ -73,14 +125,16 @@ class BuildingCreator
 
 
   def create_renter
-    puts "____Renter Entry_____"
-    puts "What is the credit score of renter?"
-    credit_score = gets.chomp
-    puts "what is the renters salary"
-    salary = gets.chomp
+    puts "____Renter Info_____"
+    credit_score = 800
+    salary = 50000000
+    puts "at Reddit Central Building, our renters have #{credit_score} and #{salary}"
     puts "what is the renter's name"
-    renter_name = gets.chomp
+    author.each do |author|
+      renter_name = @author
     renter = Renter.new(credit_score , salary, renter_name)
+  end
+
   end
 
   def print_all
