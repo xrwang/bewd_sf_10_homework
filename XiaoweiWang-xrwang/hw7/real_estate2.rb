@@ -1,8 +1,9 @@
 
 # the goal of real_estate2.rb is to take the number of authors from reddit.com/.json and use
 # that number as the number of units in the building.
-# there is only one renter per apartment
+# this assumes that there is only one renter per apartment
 # the renter names come from reddit's author names
+# reddit author names are put into an array called author, which then becomes the array of renter names
 
 require_relative 'lib/building'
 require_relative 'lib/apartment'
@@ -64,8 +65,7 @@ class BuildingCreator
     puts "____Building Entry_____"
     puts "what the building address?"
     address = gets.chomp
-    puts "what is the building name?"
-    name = gets.chomp
+    name = "The Reddit Arms"
     building = Building.new(address, name)
     #building.name = new_name
     #or puts building.name these are accessible because of attr_accessor in Building class
@@ -76,7 +76,7 @@ class BuildingCreator
   def add_unit_to_building#(building)
     # binding.pry
     units = user_list.users.to_i
-    puts "This is a building called Reddit Central. From Reddit's json file, there are #{units} in this apartment"
+    puts "This is a building called The Reddit Arms. From Reddit's json file, there are #{units} in this apartment"
     units.times do
       @building.units.push(create_apartment)
     end
@@ -114,26 +114,29 @@ class BuildingCreator
 
   def add_renter_to_apartment(apartment)
     puts "how many number of renters"
-    renter = gets.strip.to_i
+    renter = user_list.users.to_i
     renter.times do
       apartment.renter = create_renter
     end
   end
 
 
-
+# i will/need to return to this. right now it is making all the renters for each apartment, not one reddit author per apartment
+# it currenlty keeps looping through create renter.
   def create_renter
     puts "____Renter Info_____"
-    credit_score = 800
-    salary = 50000000
-    puts "at Reddit Central Building, our renters have #{credit_score} and #{salary}"
-    puts "what is the renter's name"
-    renter_name = user_list.author
-    # binding.pry
-    renter_name.each do |renter|
-      Renter.new(credit_score , salary, renter_name)
+    puts "as a computer program i will now show you the renters at the Reddit Arms Building, from the front page of Reddit"
+    user_list.users.to_i.times do
+        credit_score = rand(800)
+        salary = rand(12000000)
+        renter_name = user_list.author.sample
+        renter = Renter.new(credit_score , salary, renter_name)
+        puts "#{renter} has #{credit_score} and salary of #{salary}"
+        # binding.pry
     end
   end
+
+
 
   def print_all
     puts "#{@building}"
