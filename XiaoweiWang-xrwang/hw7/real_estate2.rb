@@ -115,9 +115,7 @@ class BuildingCreator
   def add_renter_to_apartment(apartment)
     puts "how many number of renters"
     renter = user_list.users.to_i
-    renter.times do
-      apartment.renter = create_renter
-    end
+    apartment.renter = create_renter
   end
 
 
@@ -125,15 +123,12 @@ class BuildingCreator
 # it currenlty keeps looping through create renter.
   def create_renter
     puts "____Renter Info_____"
-    puts "as a computer program i will now show you the renters at the Reddit Arms Building, from the front page of Reddit"
-    user_list.users.to_i.times do
+    puts "as a computer program i will now show you the renter of this #{}, from the front page of Reddit"
         credit_score = rand(800)
         salary = rand(12000000)
         renter_name = user_list.author.sample
         renter = Renter.new(credit_score , salary, renter_name)
         puts "#{renter} has #{credit_score} and salary of #{salary}"
-        # binding.pry
-    end
   end
 
 
@@ -141,7 +136,7 @@ class BuildingCreator
   def print_all
     puts "#{@building}"
     building.units.each do |apartment|
-      puts apartment.renter.renter_name
+      puts renter
     end
   end
 
