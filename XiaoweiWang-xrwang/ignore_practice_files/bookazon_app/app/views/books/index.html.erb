@@ -1,0 +1,12 @@
+<h1>The Finest Books from Bookazon</h1>
+
+<p>Here are some books for sale!</p>
+  <div class="well">
+    <%@books.each do |book|%>
+    <!-- this is how you write embedded ruby -->
+    <!-- things with %= make it readable
+    things with % is not seen -->
+    <ul><%=book.title%></ul>
+    <%end%>
+  </div>
+</div>
