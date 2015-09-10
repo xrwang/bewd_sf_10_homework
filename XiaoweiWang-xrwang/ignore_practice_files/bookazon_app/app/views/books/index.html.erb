@@ -1,12 +1,16 @@
 <h1>The Finest Books from Bookazon</h1>
-
+<div class ="col-12">
 <p>Here are some books for sale!</p>
   <div class="well">
     <%@books.each do |book|%>
     <!-- this is how you write embedded ruby -->
     <!-- things with %= make it readable
     things with % is not seen -->
-    <ul><%=book.title%></ul>
+    <ul><%=link_to "#{book.title}",book_path(book)%></ul>
     <%end%>
   </div>
+</div>
+
+<div class="well">
+  <%=link_to "Add New Book", new_book_path, class:'btn btn-lg btn-danger'%>
 </div>
