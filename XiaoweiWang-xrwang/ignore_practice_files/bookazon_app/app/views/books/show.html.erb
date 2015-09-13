@@ -1,2 +1,14 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div class = "col-xs-12">
+  <div class="row-fluid">
+    <h1><%=@book.title%></h1>
+      <ul>
+      <li><%=image_tag(@book.image_url, class:'img-thumbnail img-responsive')%></li>
+      <li><%=@book.author%></li>
+      <li><%=@book.year_published%></li>
+      </ul>
+  </div>
+</div>
+<div class="row-fluid">
+  <%=link_to "All Books",books_path,class: 'btn btn-lg btn-primary'%>
+  <%=link_to "Edit This Book",edit_book_path(@book),class: 'btn btn-lg btn-primary'%>
+</div>
