@@ -1,0 +1,26 @@
+<div class= "col-md-8">
+
+<h1>There are all the blog entries</h1>
+<p><%= link_to '+New article', new_article_path %></p>
+<div class="well">
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Text</th>
+    </tr>
+
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.text %></td>
+        <td><%= link_to 'Show', article_path(article)%></td>
+        <td><%= link_to 'Edit', edit_article_path(article)%></td>
+        <td><%= link_to 'Destroy', article_path(article),
+              method: :delete,
+              data: { confirm: 'R You sure?' } %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+</div>

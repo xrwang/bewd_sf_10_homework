@@ -1,9 +1,23 @@
+<div class= "col-md-8">
+<div class="page-header">
 <p>
-  <strong>Title:</strong>
-  <%= @article.title %>
+  <h1>Title:
+  <%= @article.title %></h1>
 </p>
+</div>
 
 <p>
   <strong>Text:</strong>
   <%= @article.text %>
 </p>
+
+<h3>Comments on <%=@article.title%></h3>
+<hr>
+  <%= render @article.comments %>
+
+<h3>Add a comment:</h3>
+<%= render 'comments/form'%>
+<br>
+<%= link_to 'Edit', edit_article_path(@article)%><br>
+<%= link_to 'Back', articles_path %>
+</div>

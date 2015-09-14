@@ -1,0 +1,15 @@
+<%= form_for([@article, @article.comments.build]) do |f| %>
+<div class="panel panel-default">
+  <p>
+    <%= f.label :commenter %><br>
+    <%= f.text_field :commenter %>
+  </p>
+  <p>
+    <%= f.label :body %><br>
+    <%= f.text_area :body %>
+  </p>
+  <p>
+    <%= f.submit "Submit".html_safe, class:'btn btn-lg btn-danger' %>
+  </p>
+</div>
+<% end %>

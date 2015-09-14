@@ -1,0 +1,17 @@
+<div class="list-group">
+<h4 class="list-group-item-heading">
+  <strong>Commenter:</strong>
+  <%= comment.commenter %>
+</h4>
+
+<p class="list-group-item-text">
+  <strong>Comment:</strong>
+  <%= comment.body %>
+</p>
+
+<p>
+  <%= link_to 'Destroy Comment', [comment.article, comment],
+    method: :delete,
+    data: {confirm: 'Are your sure?'}%>
+</p>
+</div>
