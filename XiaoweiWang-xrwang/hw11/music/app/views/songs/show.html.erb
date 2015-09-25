@@ -1,0 +1,20 @@
+<div class="panel-body">
+  <h2>Songs for <%=@artist.name%></h2>
+  <% @reviews.each do |review|%>
+    <li><%=@song.title%> has a score of <%=review.score%> from <%=review.reviewer_name%></li>
+  <%end%>
+
+<% @songs.each do |song| %>
+  <h2><%=song.title%> </h2>
+  <%= link_to 'Destroy', artist_song_path(@artist, song), :confirm => 'Are you sure?', :method => :delete %>
+    <h4>Add a review for this song</h4>
+    <%=simple_form_for ([@song, @song.reviews.build]) do |f|%>
+    <%=f.input :score, label: "Enter your score 1-10", as: :integer, input_html: {placeholder: "10"}%>
+    <%=f.input :body, label: "Enter your review", input_html: {placeholder: "This is a great song"}%>
+    <%=f.input :reviewer_name, label: "Enter your name", input_html: {placeholder: "Mindy2020"}%>
+    <%= f.submit "Submit".html_safe, class: "btn btn-lg"%>
+    <%end%>
+
+  <% end %>
+
+</div>

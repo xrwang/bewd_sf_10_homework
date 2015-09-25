@@ -1,0 +1,42 @@
+<div class="panel-body">
+<h1><%=@artist.name=%></h1>
+<p><%=@artist.description%></p>
+<p><%=image_tag(@artist.image_url, class: 'img-thumbnail img-responsive')  %></p>
+</div>
+
+<div class="panel-body">
+  <h2>Songs for <%=@artist.name%></h2>
+<% @songs.each do |song| %>
+  <li><%=song.title%> </li>
+  <%= link_to 'Show', artist_song_path(@artist, song)%>
+      <% end %>
+</div>
+
+<div class="panel-body">
+  <h1>Add a song for this artist</h1>
+  <%=simple_form_for ([@artist, @artist.songs.build]) do |f|%>
+  <%=f.input :title, label: false, input_html: {placeholder: "Title"}%>
+  <%=f.input :length, label: false, as: :integer, input_html: {placeholder: "0:00"}%>
+  <%=f.input :genre, label: false, input_html: {placeholder: "Genre"}%>
+  <%= f.submit "Submit".html_safe, class: "btn btn-lg"%>
+  <%end%>
+</div>
+
+
+<div class="panel-body">
+  <h3>These are the artist reviews:</h3>
+  <% @reviews.each do |review|%>
+    <li><%=@artist.name%> has a score of <%=review.score%> from <%=review.reviewer_name%></li>
+    <%end%>
+</div>
+
+
+<div class="panel-body">
+  <h4>Add a review for this artist</h4>
+  <%=simple_form_for ([@artist, @artist.reviews.build]) do |f|%>
+  <%=f.input :score, label: "Enter your score 1-10", as: :integer, input_html: {placeholder: "10"}%>
+  <%=f.input :body, label: "Enter your review", input_html: {placeholder: "This is a great artist"}%>
+  <%=f.input :reviewer_name, label: "Enter your name", input_html: {placeholder: "Mindy2020"}%>
+  <%= f.submit "Submit".html_safe, class: "btn btn-lg"%>
+  <%end%>
+</div>

@@ -1,0 +1,30 @@
+
+<div class = "col-xs-12">
+  <div class="table-responsive">
+    <h1 style ="color: #cc3333">Artists</h1>
+    <table class = "table table-hover">
+        <tr class="small">
+          <th>Artist Name</th>
+          <th>Artist Description</th>
+          <th>Artist Image</th>
+          <th>Actions</th>
+
+        </tr>
+        <%@artists.each do |artist|%>
+        <tr>
+          <td><%=artist.name%></td>
+          <td><%=artist.description%></td>
+          <td> <%= image_tag(artist.image_url, class: 'img-thumbnail img-responsive')  %> </td>
+          <td><%=link_to 'Show', artist_path(artist), class: 'btn btn-default btn-xs'%></td>
+          <td><%=link_to 'Edit', edit_artist_path(artist), class: 'btn btn-success btn-xs'%></td>
+          <td><%= link_to 'Delete', artist, method: :delete, data: { confirm: 'You sure honey?' }, class: 'btn btn-warning btn-xs' %></td>
+        </tr>
+        <%end%>
+    </table>
+
+  </div>
+
+  <%=link_to 'Add new artist', new_artist_path, class: 'btn btn-default btn-lg'%>
+
+
+</div>

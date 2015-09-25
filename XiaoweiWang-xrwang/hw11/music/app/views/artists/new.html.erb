@@ -1,0 +1,16 @@
+
+<div class = "panel panel-default">
+  <div class = "panel-heading">
+    <h1> New artist form</h1>
+  </div>
+
+      <div class="panel-body">
+        <%=simple_form_for @artist do |f|%>
+        <%=f.input :name, label: false, input_html: {placeholder: "Name"}%>
+        <%=f.input :description, label: false, as: :text, input_html: {placeholder: "Artist Description"}%>
+        <%=f.input :image_url,label: false, input_html: {placeholder: "Image URL"}%>
+        <%= f.submit "Submit".html_safe, class: "btn btn-lg"%>
+        <%end%>
+      </div>
+
+</div>
